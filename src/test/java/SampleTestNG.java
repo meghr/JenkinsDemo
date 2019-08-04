@@ -7,5 +7,5 @@ public class SampleTestNG {
        int a = 5;
        boolean input = PrimeNumber.isPrime(a);
        Assert.assertTrue(input, "given input is not primer");
-   
+   }
 }
