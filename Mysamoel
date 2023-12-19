@@ -1,48 +1,24 @@
-Certainly! Here's an updated version of the Java code that appends the first line 100 times and replaces any occurrence of "11=" with a unique value:
+Certainly! Here's a Java function that generates a unique string in the specified format:
 
 ```java
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+public class UniqueStringGenerator {
+    private static int counter = 0;
 
-public class FileCopyAndAppend {
+    public static String generateUniqueString() {
+        // Format: sharm488_000001
+        String prefix = "sharm488_";
+        String numericPart = String.format("%06d", counter++);
+        return prefix + numericPart;
+    }
+
     public static void main(String[] args) {
-        String inputFilePath = "path/to/your/inputfile.txt";
-        String outputFilePath = "path/to/your/outputfile.txt";
-
-        try {
-            // Read the first line from the input file
-            String firstLine = readFirstLine(inputFilePath);
-
-            // Append the first line 100 times and replace "11=" with a unique value
-            for (int i = 0; i < 100; i++) {
-                String lineToAppend = firstLine.replace("11=", "uniqueValue" + i + "=");
-                appendToFile(outputFilePath, lineToAppend);
-            }
-
-            System.out.println("File copy, append, and replace successful.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static String readFirstLine(String filePath) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            // Read the first line from the file
-            return reader.readLine();
-        }
-    }
-
-    private static void appendToFile(String filePath, String lineToAppend) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            // Append the line to the end of the file
-            writer.write(lineToAppend);
-            writer.newLine();
+        // Example: calling the function multiple times
+        for (int i = 0; i < 5; i++) {
+            String uniqueString = generateUniqueString();
+            System.out.println(uniqueString);
         }
     }
 }
 ```
 
-This code uses a loop to append the modified first line 100 times. Inside the loop, it replaces "11=" with a unique value by appending the loop index (`i`) to the replacement string. Make sure to replace the file paths as mentioned before.
+In this code, the `generateUniqueString` function uses a static counter to keep track of the numeric part. It formats the numeric part to have leading zeros using `String.format("%06d", counter++)` to ensure it is always six digits. When you call this function multiple times, it will return unique strings with an increasing numeric part.
